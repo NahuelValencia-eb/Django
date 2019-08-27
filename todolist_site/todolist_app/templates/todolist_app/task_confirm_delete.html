@@ -1,0 +1,13 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_javascript jquery='full' %}
+
+<div class="col-md-6">
+    <h3>Delete Task</h3>
+    <form method="post">{% csrf_token %}
+        <p><b> Are you sure you want to delete "{{ object }}"?</b></p>
+        <input class="btn btn-danger" type="submit" value="Confirm" />
+        <a href="{% url 'task-list' %}" class="btn btn-danger">Cancel</a>
+    </form>
+</div>

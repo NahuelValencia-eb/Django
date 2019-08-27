@@ -1,0 +1,17 @@
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_javascript jquery='full' %}
+{{form.media}}
+<div class="col-md-6">
+<h3 style="text-align: center">New/Update Task</h3>
+<form method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            OK
+        </button>
+    {% endbuttons %}
+</form>
+</div>
