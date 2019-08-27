@@ -8,16 +8,24 @@ from django.shortcuts import redirect
 class TaskList(ListView):
     model = Task
 
+    def get_queryset(self):
+        return Task.objects.filter(author=self.request.user)
+
 
 class TaskCreate(CreateView):
     model = Task
-    fields = '__all__'
+    fields = ['name', 'priority']
     success_url = reverse_lazy('task-list')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        self.object = form.save()
+        return super(TaskCreate, self).form_valid(form)
 
 
 class TaskUpdate(UpdateView):
     model = Task
-    fields = '__all__'
+    fields = ['name', 'priority']
     success_url = reverse_lazy('task-list')
 
 
