@@ -1,10 +1,20 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LoginView, LogoutView
 from .models import Task
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 
 
 # Create your views here.
+
+class Login(LoginView):
+    pass
+
+
+class Logout(LogoutView):
+    pass
+
+
 class TaskList(ListView):
     model = Task
 

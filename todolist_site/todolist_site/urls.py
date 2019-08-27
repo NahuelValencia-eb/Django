@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from todolist_app.views import Login, Logout
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/login/$', Login.as_view(), name='login'),
+    url(r'^accounts/logout/$', Logout.as_view(), name='logout'),
+    url(r'^password_reset/$', Login, name='password_reset'),
     url(r'tasks/', include('todolist_app.urls')),
 ]
