@@ -32,6 +32,13 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         self.object = form.save()
         return super(TaskCreate, self).form_valid(form)
+    
+    def check_task(request, pk):
+        task = Task.objects.get(pk=pk)
+        if not task.done:
+            task.done = True
+        task.save()
+        return redirect('task-list')
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
@@ -44,10 +51,3 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task-list')
 
-
-def check_task(request, pk):
-    task = Task.objects.get(pk=pk)
-    if not task.done:
-        task.done = True
-    task.save()
-    return redirect('task-list')
