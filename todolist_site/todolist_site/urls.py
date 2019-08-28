@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^accounts/login/$', Login.as_view(), name='login'),
     # url(r'^password_reset/$', Login, name='password_reset'),
     url(r'', include('todolist_app.urls')),
+    url('', include('social_django.urls', namespace='social')),
     url(r'tasks/', include('todolist_app.urls')),
 ]
