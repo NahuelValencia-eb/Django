@@ -1,9 +1,11 @@
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.views.generic.base import TemplateView
 from .models import Task
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from eventbrite import Eventbrite
 
 
 # Create your views here.
@@ -51,3 +53,16 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task-list')
 
+
+class Event(TemplateView):
+    template_name = "events_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_event(user):
+        social = user.social_auth.filter(provider='eventbrite')[0]
+        eb = Eventbrite(social.access_token)
+        events = eb.get('/users/me/events/')
+        return [event for event in events['events']]
