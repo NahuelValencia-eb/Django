@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import views
+from todolist_app.views import Login, Logout
 
 urlpatterns = [
     url(r'create/$', views.TaskCreate.as_view(), name='task-create'),

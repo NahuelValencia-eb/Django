@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .models import Task
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -15,14 +16,14 @@ class Logout(LogoutView):
     pass
 
 
-class TaskList(ListView):
+class TaskList(LoginRequiredMixin, ListView):
     model = Task
 
     def get_queryset(self):
         return Task.objects.filter(author=self.request.user)
 
 
-class TaskCreate(CreateView):
+class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     fields = ['name', 'priority']
     success_url = reverse_lazy('task-list')
@@ -33,13 +34,13 @@ class TaskCreate(CreateView):
         return super(TaskCreate, self).form_valid(form)
 
 
-class TaskUpdate(UpdateView):
+class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
     fields = ['name', 'priority']
     success_url = reverse_lazy('task-list')
 
 
-class TaskDelete(DeleteView):
+class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task-list')
 
