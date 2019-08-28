@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/logout/$', Logout.as_view(), name='logout'),
     url(r'^accounts/login/$', Login.as_view(), name='login'),
-    url(r'^password_reset/$', Login, name='password_reset'),
+    # url(r'^password_reset/$', Login, name='password_reset'),
+    url(r'', include('todolist_app.urls')),
     url(r'tasks/', include('todolist_app.urls')),
 ]
