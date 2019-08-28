@@ -9,16 +9,18 @@
     <div class="col-md-4">
     </div>
     <div class="col-md-4">
+        <br><br>
         <h2 class="text-center">Login</h2>
         <div class="text-center">
+            <br>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-info">Log In</button>
             </form>
-              <div class="col-lg-12 text-center">
-                    <a class="btn btn-info loginEB" href="{% url "social:begin" "eventbrite" %}">Log In with Eventbrite</a>
-              </div>
+            <div class="col-lg-12 text-center">
+              <a class="btn btn-info loginEB" href="{% url "social:begin" "eventbrite" %}">Log In with Eventbrite</a>
+            </div>
         </div>
     </div>
   </div>
