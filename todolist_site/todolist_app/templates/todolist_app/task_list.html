@@ -3,7 +3,7 @@
 {% bootstrap_javascript %}
 {% bootstrap_javascript jquery='full' %}
 <div class="col-md-6 col-lg-12">
-<h1 style="text-align: center">Tasks</h1>
+<h1 style="text-align: center">Tasks List</h1>
 <a  style="float: right" href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
 <table class="table" >
     <thead>
@@ -30,7 +30,6 @@
                 <a class="btn btn-success" href="{% url 'task-check' pk=task.id %}">Done</a>
                 <a class="btn btn-warning" href="{% url 'task-update' pk=task.id %}">Update Task</a>
                 <a class="btn btn-danger" href="{% url 'task-delete' pk=task.id %}">Delete Task</a>
-            
             </td>
         </tr>
         {% endfor %}
@@ -38,5 +37,6 @@
   </table>
 <p>
     <a class="btn btn-primary" href="{% url 'task-create' %}">New Task</a>
+    <a style="float: rigth" class="btn btn-primary" href="{% url 'events-list' %}">Back to Events</a>
 </p>
 </div>

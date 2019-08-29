@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'', include('todolist_app.urls')),
     url('', include('social_django.urls', namespace='social')),
     url(r'tasks/', include('todolist_app.urls')),
-    url(r'events/', Event.as_view(), name='events'),
+    url(r'events/', Event.as_view(), name='events-list'),
 ]

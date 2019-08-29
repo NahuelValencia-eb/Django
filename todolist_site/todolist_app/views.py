@@ -34,7 +34,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         self.object = form.save()
         return super(TaskCreate, self).form_valid(form)
-    
+
     def check_task(request, pk):
         task = Task.objects.get(pk=pk)
         if not task.done:
@@ -59,10 +59,12 @@ class Event(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['events'] = self.get_event()
         return context
 
-    def get_event(user):
-        social = user.social_auth.filter(provider='eventbrite')[0]
+    def get_event(self):
+        social = self.request.user.social_auth.filter(provider='eventbrite')[0]
         eb = Eventbrite(social.access_token)
         events = eb.get('/users/me/events/')
-        return [event for event in events['events']]
+        # [event for event in events['events']]
+        return events
