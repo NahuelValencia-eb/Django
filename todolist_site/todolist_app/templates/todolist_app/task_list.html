@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-        {% for task in object_list %}
+        {% for task in task_list %}
         <tr>
             <td>{{task.id}}</td>
             <td>{{task.name}}</td>
@@ -36,7 +36,7 @@
     </tbody>
   </table>
 <p>
-    <a class="btn btn-primary" href="{% url 'task-create' %}">New Task</a>
-    <a style="float: rigth" class="btn btn-primary" href="{% url 'events-list' %}">Back to Events</a>
+    <a class="btn btn-primary" href="{% url 'task-create-event' idEvent %}">New Task</a>
+    <a style="float: right;" class="btn btn-primary" href="{% url 'events-list' %}">Back to Events</a>
 </p>
 </div>

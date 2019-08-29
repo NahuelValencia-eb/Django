@@ -24,3 +24,4 @@ class Task(models.Model):
         default=None
     )
     done = models.BooleanField(default=False)
+    idEvent = models.IntegerField(default=None)

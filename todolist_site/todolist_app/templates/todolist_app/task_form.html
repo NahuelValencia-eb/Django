@@ -11,6 +11,7 @@
         Update Task
     {% endif %}
 </h3>
+<a  style="float: right" href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
 <form method="post" class="form">
     {% csrf_token %}
     {% bootstrap_form form %}

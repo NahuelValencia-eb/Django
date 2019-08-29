@@ -4,6 +4,7 @@
 {% bootstrap_javascript jquery='full' %}
 <div class="col-md-6 col-lg-12">
 <h1 style="text-align: center">Event Lists</h1>
+<a  style="float: right" href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
 <table class="table" >
     <thead>
       <tr>
@@ -21,7 +22,7 @@
             <td>{{event.start.local}}</td>
             <td>{{event.end.local}}</td>
             <td>
-              <a class="btn btn-success" href="{% url 'task-list' %}">List Tasks</a>
+              <a class="btn btn-success" href="{% url 'event-task-list' event.id%}">List Tasks</a>
             </td>
         </tr>
         {% endfor %}
