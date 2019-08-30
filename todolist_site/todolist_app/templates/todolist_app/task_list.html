@@ -5,6 +5,7 @@
 <div class="col-md-6 col-lg-12">
 <h1 style="text-align: center">Tasks List</h1>
 <a  style="float: right" href="{% url 'logout' %}" class="btn btn-danger">Log Out</a>
+
 <table class="table" >
     <thead>
       <tr>
@@ -27,9 +28,9 @@
             <td>{{task.author}}</td>
             <td>{{task.done}}</td>
             <td>
-                <a class="btn btn-success" href="{% url 'task-check' pk=task.id %}">Done</a>
-                <a class="btn btn-warning" href="{% url 'task-update' pk=task.id %}">Update Task</a>
-                <a class="btn btn-danger" href="{% url 'task-delete' pk=task.id %}">Delete Task</a>
+                <a class="btn btn-success" href="{% url 'task-check' idEvent task.id %}">Done</a>
+                <a class="btn btn-warning" href="{% url 'task-update' idEvent task.id %}">Update Task</a>
+                <a class="btn btn-danger" href="{% url 'task-delete' idEvent task.id %}">Delete Task</a>
             </td>
         </tr>
         {% endfor %}

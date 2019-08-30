@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
 from todolist_app.views import Login, Logout
 
 
@@ -23,7 +24,8 @@ urlpatterns = [
     url(r'^accounts/logout/$', Logout.as_view(), name='logout'),
     url(r'^accounts/login/$', Login.as_view(), name='login'),
     # url(r'^password_reset/$', Login, name='password_reset'),
+    url(r'^$', Login.as_view(), name='login'),
     url(r'', include('todolist_app.urls')),
     url('', include('social_django.urls', namespace='social')),
-    url(r'tasks/', include('todolist_app.urls')),
+    #url(r'tasks/', include('todolist_app.urls')),
 ]
