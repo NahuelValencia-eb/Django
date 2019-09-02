@@ -14,7 +14,7 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=120)
     created = models.DateTimeField(auto_now_add=True)
     changed = models.DateTimeField(auto_now=True)
     priority = models.ForeignKey(Priority, on_delete=models.CASCADE)
@@ -24,4 +24,4 @@ class Task(models.Model):
         default=None
     )
     done = models.BooleanField(default=False)
-    idEvent = models.IntegerField(default=None)
+    id_event = models.IntegerField(default=None)

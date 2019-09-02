@@ -23,12 +23,12 @@ class TaskList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['task-list'] = Task.objects.filter(idEvent=self.kwargs['idEvent'])
-        context['idEvent'] = self.kwargs['idEvent']
+        context['task-list'] = Task.objects.filter(id_event=self.kwargs['id_event'])
+        context['id_event'] = self.kwargs['id_event']
         return context
 
     def get_queryset(self):
-        return Task.objects.filter(author=self.request.user, idEvent=self.kwargs['idEvent'])
+        return Task.objects.filter(author=self.request.user, id_event=self.kwargs['id_event'])
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
@@ -36,21 +36,21 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     fields = ['name', 'priority']
 
     def get_success_url(self):
-        return reverse_lazy('event-task-list', kwargs={'idEvent': self.kwargs['idEvent']})
+        return reverse_lazy('event-task-list', kwargs={'id_event': self.kwargs['id_event']})
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.idEvent = self.kwargs['idEvent']
+        form.instance.id_event = self.kwargs['id_event']
         self.object = form.save()
         return super(TaskCreate, self).form_valid(form)
 
 
-def check_task(request, idEvent, pk):
+def check_task(request, id_event, pk):
     task = Task.objects.get(pk=pk)
     if not task.done:
         task.done = True
     task.save()
-    return redirect('event-task-list', idEvent=idEvent)
+    return redirect('event-task-list', id_event=id_event)
 
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
@@ -59,7 +59,7 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
     # success_url = reverse_lazy('event-task-list')
 
     def get_success_url(self):
-        return reverse_lazy('event-task-list', kwargs={'idEvent': self.kwargs['idEvent']})
+        return reverse_lazy('event-task-list', kwargs={'id_event': self.kwargs['id_event']})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,7 +72,7 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     # success_url = reverse_lazy('task-list')
 
     def get_success_url(self):
-        return reverse_lazy('event-task-list', kwargs={'idEvent': self.kwargs['idEvent']})
+        return reverse_lazy('event-task-list', kwargs={'id_event': self.kwargs['id_event']})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

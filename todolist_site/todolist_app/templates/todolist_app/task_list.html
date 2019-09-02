@@ -28,16 +28,16 @@
             <td>{{task.author}}</td>
             <td>{{task.done}}</td>
             <td>
-                <a class="btn btn-success" href="{% url 'task-check' idEvent task.id %}">Done</a>
-                <a class="btn btn-warning" href="{% url 'task-update' idEvent task.id %}">Update Task</a>
-                <a class="btn btn-danger" href="{% url 'task-delete' idEvent task.id %}">Delete Task</a>
+                <a class="btn btn-success" href="{% url 'task-check' id_event task.id %}">Done</a>
+                <a class="btn btn-warning" href="{% url 'task-update' id_event task.id %}">Update Task</a>
+                <a class="btn btn-danger" href="{% url 'task-delete' id_event task.id %}">Delete Task</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
   </table>
 <p>
-    <a class="btn btn-primary" href="{% url 'task-create-event' idEvent %}">New Task</a>
+    <a class="btn btn-primary" href="{% url 'task-create-event' id_event %}">New Task</a>
     <a style="float: right;" class="btn btn-primary" href="{% url 'events-list' %}">Back to Events</a>
 </p>
 </div>
