@@ -1,0 +1,15 @@
+[run]
+source =
+    todolist_app
+
+omit =
+    env/*
+    */test*
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def setUp
+    def test_
+    return raw_input
+    print

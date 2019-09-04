@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from todolist_site import get_env_variable
+from todolist import get_env_variable
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'todolist_site.urls'
+ROOT_URLCONF = 'todolist.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'todolist_site.wsgi.application'
+WSGI_APPLICATION = 'todolist.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.eventbrite.EventbriteOAuth2',
