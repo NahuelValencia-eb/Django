@@ -24,4 +24,4 @@ class Task(models.Model):
         default=None
     )
     done = models.BooleanField(default=False)
-    id_event = models.IntegerField(default=None)
+    id_event = models.CharField(max_length=30)

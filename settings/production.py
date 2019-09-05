@@ -1,6 +1,6 @@
-import dj_database_url
 from .base import *
 from . import get_env_variable
+import dj_database_url
 
 
 SOCIAL_AUTH_EVENTBRITE_KEY = get_env_variable('SOCIAL_AUTH_EVENTBRITE_KEY')
