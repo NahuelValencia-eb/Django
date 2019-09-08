@@ -11,7 +11,7 @@ from todolist_app.models import Task, Priority
 from social_django.models import UserSocialAuth
 
 
-class TaskCreateViewTest(TestCase):
+class TaskTest(TestCase):
     def setUp(self):
         self.client = Client()
 
@@ -30,8 +30,6 @@ class TaskCreateViewTest(TestCase):
     def test_task_create(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/task/create/".format("12345")
-        #task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=12345)
-        # data =  {'name': 'task', 'priority':priority, 'created':date, 'changed': date, 'user':self.user}                     
         data = {'name': 'task', 'priority': priority}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
@@ -40,8 +38,21 @@ class TaskCreateViewTest(TestCase):
     def test_task_delete(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/delete/{}/".format("12345","1")
-        #task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=12345)
-        # data =  {'name': 'task', 'priority':priority, 'created':date, 'changed': date, 'user':self.user}                     
+        data = {'name': 'task', 'priority': priority}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
+
+    
+    def test_task_update(self):
+        priority = Priority.objects.create(name="Normal")
+        url = "/events/{}/update/{}/".format("12345","2")
+        data = {'name': 'task', 'priority': priority}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_task_done(self):
+        priority = Priority.objects.create(name="Normal")
+        url = "/events/{}/tasks".format("12345","9")
         data = {'name': 'task', 'priority': priority}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
@@ -62,6 +73,7 @@ class EventListViewTest(TestCase):
                 'token_type': 'bearer',
             }
         )
+
 
     def mocked_requests_get(*args, **_):
         class MockResponse:
