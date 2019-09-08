@@ -15,8 +15,6 @@ class TaskCreateViewTest(TestCase):
     def setUp(self):
         self.client = Client()
 
-        # self.user = User.objects.create(username='testuser', password='12345', is_active=True, is_staff=True, is_superuser=True) 
-        # self.user.save()
         self.user = User.objects.create_user(username='testuser', password='12345')
         UserSocialAuth.objects.create(
             user=self.user,
@@ -32,7 +30,17 @@ class TaskCreateViewTest(TestCase):
     def test_task_create(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/task/create/".format("12345")
-        task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=12345)
+        #task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=12345)
+        # data =  {'name': 'task', 'priority':priority, 'created':date, 'changed': date, 'user':self.user}                     
+        data = {'name': 'task', 'priority': priority}
+        response = self.client.post(url, data)
+        self.assertEqual(response.status_code, 302)
+
+
+    def test_task_delete(self):
+        priority = Priority.objects.create(name="Normal")
+        url = "/events/{}/delete/{}/".format("12345","1")
+        #task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=12345)
         # data =  {'name': 'task', 'priority':priority, 'created':date, 'changed': date, 'user':self.user}                     
         data = {'name': 'task', 'priority': priority}
         response = self.client.post(url, data)
