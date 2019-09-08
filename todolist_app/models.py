@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 class Priority(models.Model):
-    name = models.CharField(max_length=10)
+    name = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
@@ -14,7 +14,7 @@ class Task(models.Model):
     def __str__(self):
         return self.name
 
-    name = models.CharField(max_length=120)
+    name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
     changed = models.DateTimeField(auto_now=True)
     priority = models.ForeignKey(Priority, on_delete=models.CASCADE)
@@ -24,4 +24,4 @@ class Task(models.Model):
         default=None
     )
     done = models.BooleanField(default=False)
-    id_event = models.CharField(max_length=30)
+    id_event = models.CharField(max_length=50)

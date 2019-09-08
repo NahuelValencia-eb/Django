@@ -4,6 +4,12 @@ from __future__ import unicode_literals
 
 from django.db import migrations
 
+def create_priorities(apps, schema_editor):
+    Priority = apps.get_model('todolist_app', 'Priority')
+    priority_names = ['Low', 'Normal', 'Urgent']
+    for name in priority_names:
+        Priority.objects.create(name=name)
+
 
 class Migration(migrations.Migration):
 
@@ -19,4 +25,5 @@ class Migration(migrations.Migration):
         migrations.DeleteModel(
             name='User',
         ),
+        migrations.RunPython(create_priorities),
     ]
