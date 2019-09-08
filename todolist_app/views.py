@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from eventbrite import Eventbrite
+import requests
 
 
 # Create your views here.

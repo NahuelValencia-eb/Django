@@ -27,7 +27,7 @@ class TaskTest(TestCase):
             }
         )
 
-    def test_task_create(self):
+    def test_task_create_correct_redirection(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/task/create/".format("12345")
         data = {'name': 'task', 'priority': priority}
@@ -35,7 +35,7 @@ class TaskTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
 
-    def test_task_delete(self):
+    def test_task_delete_correct_redirection(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/delete/{}/".format("12345","1")
         data = {'name': 'task', 'priority': priority}
@@ -43,22 +43,23 @@ class TaskTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     
-    def test_task_update(self):
+    def test_task_update_correct_redirection(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/update/{}/".format("12345","2")
         data = {'name': 'task', 'priority': priority}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
 
-    def test_task_done(self):
+    def test_task_done_correct_redirection(self):
         priority = Priority.objects.create(name="Normal")
         url = "/events/{}/tasks".format("12345","9")
         data = {'name': 'task', 'priority': priority}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, 302)
+        
 
 
-class EventListViewTest(TestCase):
+class EventTest(TestCase):
     def setUp(self):
         self.client = Client()
 
@@ -90,8 +91,33 @@ class EventListViewTest(TestCase):
 
         return MockResponse()
 
-    # @unittest.mock.patch('requests.get', side_effect=mocked_requests_get)
-    # def test_get_events(self, mocked_requests):
-    #     login = self.client.force_login(UserSocialAuth.user)
-    #     response = self.client.get('events/')
-    #     self.assertEqual(response.status_code, 200)
+    #@unittest.mock.patch('requests.get', side_effect=mocked_requests_get)
+    #def test_get_events(self, mocked_requests):
+    #    self.client.force_login(self.user)
+    #    response = self.client.get('/events/')
+    #    self.assertEqual(response.status_code, 200)
+
+
+class LoginLogoutUser(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+        self.user = User.objects.create_user(username='nahuel', password='123456')
+        UserSocialAuth.objects.create(
+            user=self.user,
+            provider='eventbrite',
+            uid='34563456',
+            extra_data={
+                'auth_time': 1567447106,
+                'access_token': 'KLHJLJHLKJH',
+                'token_type': 'bearer',
+            }
+        )
+    
+    def test_valid_user_login(self):
+        response = self.client.login(username='nahuel', password='123456')
+        self.assertTrue(response, True)
+
+    def test_invalid_user_login(self):
+        response = self.client.login(username='fred', password='secret')
+        self.assertEqual(response, False)

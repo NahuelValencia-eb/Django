@@ -32,4 +32,6 @@ class TaskTestCase(TestCase):
     def test_task_creation(self):
         priority = Priority.objects.create(name="Low")
         task = Task.objects.create(name="Tarea1", created=datetime.now(), changed=datetime.now(), priority=priority, author=self.user, done=False, id_event=13243546)
+        task.full_clean()
         self.assertEqual(task.name, "Tarea1")
+        self.assertTrue(isinstance(task, Task))
