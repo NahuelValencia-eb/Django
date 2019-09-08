@@ -14,7 +14,7 @@ class TaskTestCase(TestCase):
 
     def test_same_id_priority(self):
         priority = Priority.objects.create(name="Normal")
-        self.assertEqual(1, priority.id)
+        self.assertEqual(4, priority.id)
 
     # @parameterized.expand([
     #     ('Low', 'Low'),
